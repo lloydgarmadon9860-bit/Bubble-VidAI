@@ -23,13 +23,14 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
-      - uses: android-actions/setup-android@v3
+
       - name: Build APK
         run: |
+          export ANDROID_HOME=/usr/local/lib/android/sdk
+          export ANDROID_SDK_ROOT=$ANDROID_HOME
           mkdir -p extracted
           unzip -o Bubble-VidAI-Android-source.zip -d extracted
           cd extracted
-          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
           mkdir -p app/src/main/assets
           mkdir -p app/src/main/res/drawable
           mkdir -p app/src/main/java/cz/bubble/vidai
